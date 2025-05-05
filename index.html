@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Scopri la tua fragranza</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4e/Light_fabric_texture_background.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #333;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #7c4c2c;
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 24px;
+      background-color: #7c4c2c;
+      color: white;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 1.3em;
+      text-align: center;
+      color: #2e5a45;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Scopri la tua fragranza ideale</h1>
+    <form id="quizForm">
+      <div class="question">
+        <p>1. Quali delle seguenti emozioni ti descrive meglio?</p>
+        <label><input type="radio" name="q1" value="2"> Serenità, calma, stabilità</label><br>
+        <label><input type="radio" name="q1" value="3"> Mistero, introspezione, profondità</label><br>
+        <label><input type="radio" name="q1" value="1"> Forza, determinazione, coraggio</label><br>
+      </div>
+      <div class="question">
+        <p>2. Quali note di profumo prediligi?</p>
+        <label><input type="radio" name="q2" value="3"> Legnose</label><br>
+        <label><input type="radio" name="q2" value="2"> Dolce</label><br>
+        <label><input type="radio" name="q2" value="1"> Speziate</label><br>
+      </div>
+      <div class="question">
+        <p>3. Quale stile descrive al meglio la tua personalità?</p>
+        <label><input type="radio" name="q3" value="3"> Sofisticato</label><br>
+        <label><input type="radio" name="q3" value="2"> Casual</label><br>
+        <label><input type="radio" name="q3" value="1"> Sportivo</label><br>
+      </div>
+      <div class="question">
+        <p>4. Quando ti piace indossare il profumo?</p>
+        <label><input type="radio" name="q4" value="1"> A lavoro</label><br>
+        <label><input type="radio" name="q4" value="2"> Per serate speciali</label><br>
+        <label><input type="radio" name="q4" value="3"> Sempre</label><br>
+      </div>
+      <button type="button" onclick="calcolaRisultato()">Scopri la fragranza</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  <script>
+    function calcolaRisultato() {
+      let risposte = {1: 0, 2: 0, 3: 0};
+      for (let i = 1; i <= 4; i++) {
+        let risposta = document.querySelector('input[name="q' + i + '"]:checked');
+        if (risposta) risposte[risposta.value]++;
+        else {
+          document.getElementById('result').innerText = "Rispondi a tutte le domande!";
+          return;
+        }
+      }
+      let max = Object.entries(risposte).reduce((a, b) => b[1] > a[1] ? b : a)[0];
+      let fragranze = {
+        1: "BLACK OUD – deciso, speziato, avvolgente",
+        2: "MILK & HONEY – dolce, morbido, confortante",
+        3: "SOPHISTICATED – elegante, profondo, raffinato"
+      };
+      document.getElementById('result').innerText = "La tua fragranza ideale è: " + fragranze[max];
+    }
+  </script>
+</body>
+</html>
